@@ -32,3 +32,7 @@ app_category_list:
 app_category_edit:
     path: '/category/{id}/edit'
     controller: App\Controller\CategoryController::edit
+
+app_product_create:
+    path: '/product/create'
+    controller: App\Controller\ProductController::create
