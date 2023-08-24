@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sales{% endblock %}
+
+{% block body %}
+    <h1>Sales List</h1>
+
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Client</th>
+            <th>Total</th>
+            <th>Actions</th>
+        </tr>
+        {% for sale in sales %}
+            <tr>
+                <td>{{ sale.date|date('Y-m-d H:i:s') }}</td>
+                <td>{{ sale.client.name }}</td>
+                <td>{{ sale.total }}</td>
+                <td>
+                    <a href="{{ path('app_sale_edit', {'id': sale.id}) }}">Edit</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

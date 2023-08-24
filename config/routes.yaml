@@ -48,3 +48,15 @@ app_product_edit:
 app_client_index:
     path: '/client'
     controller: App\Controller\ClientController::index
+
+app_client_create:
+    path: '/client/create'
+    controller: App\Controller\ClientController::create
+
+app_client_edit:
+    path: '/client/{id}/edit'
+    controller: App\Controller\ClientController::edit
+
+app_sale_index:
+    path: '/sale'
+    controller: App\Controller\SaleController::index
