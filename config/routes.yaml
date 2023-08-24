@@ -36,3 +36,7 @@ app_category_edit:
 app_product_create:
     path: '/product/create'
     controller: App\Controller\ProductController::create
+
+app_product_index:
+    path: '/product'
+    controller: App\Controller\ProductController::index
