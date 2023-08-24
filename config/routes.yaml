@@ -20,3 +20,7 @@ app_sales:
 app_register:
     path: /register
     controller: App\Controller\RegistrationController::register
+
+app_category_create:
+    path: '/category/create'
+    controller: App\Controller\CategoryController::create
