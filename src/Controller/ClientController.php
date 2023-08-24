@@ -45,4 +45,31 @@ class ClientController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/client/{id}/edit", name="app_client_edit")
+     */
+    public function edit(Request $request, EntityManagerInterface $entityManager, int $id): Response
+    {
+        $client = $entityManager->getRepository(Client::class)->find($id);
+
+        if (!$client) {
+            throw $this->createNotFoundException('Client not found.');
+        }
+
+        $form = $this->createForm(ClientType::class, $client);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Client updated successfully.');
+
+            return $this->redirectToRoute('app_client_index');
+        }
+
+        return $this->render('client/edit.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
 }
