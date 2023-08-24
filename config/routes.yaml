@@ -45,3 +45,6 @@ app_product_edit:
     path: '/product/{id}/edit'
     controller: App\Controller\ProductController::edit
 
+app_client_index:
+    path: '/client'
+    controller: App\Controller\ClientController::index

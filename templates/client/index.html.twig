@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Clients{% endblock %}
+
+{% block body %}
+    <h1>Client List</h1>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+        {% for client in clients %}
+            <tr>
+                <td>{{ client.name }}</td>
+                <td>{{ client.phone }}</td>
+                <td>{{ client.email }}</td>
+                <td>
+                    <a href="{{ path('app_client_edit', {'id': client.id}) }}">Edit</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
