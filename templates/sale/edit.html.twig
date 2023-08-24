@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar Venda{% endblock %}
+
+{% block body %}
+    <h1>Editar Venda</h1>
+
+    {{ form_start(form) }}
+    {{ form_row(form.saleDate) }}
+
+    <h2>Itens da Venda</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            <th>Preço Unitário</th>
+            <th>Desconto</th>
+            <th>Total</th>
+            <th>Remover</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% include 'sale/_sale_item_row.html.twig' with { 'saleItemsForm': form.saleItems } %}
+        </tbody>
+    </table>
+
+    <button type="button" id="addSaleItem">Adicionar Item</button>
+
+    <button type="submit">Salvar</button>
+    {{ form_end(form) }}
+
+    <script>
+        $(document).ready(function() {
+            var $saleItemsContainer = $('#saleItems');
+            var $addSaleItemButton = $('#addSaleItem');
+            var index = $saleItemsContainer.find(':input').length;
+
+            $addSaleItemButton.click(function() {
+                var prototype = $saleItemsContainer.data('prototype');
+                var newForm = prototype.replace(/__name__/g, index);
+                $saleItemsContainer.append(newForm);
+                index++;
+            });
+        });
+    </script>
+{% endblock %}

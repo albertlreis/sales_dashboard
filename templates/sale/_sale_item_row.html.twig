@@ -1,0 +1,19 @@
+{% for saleItemForm in saleItemsForm.children %}
+    <tr>
+        <td>
+{#            {{ dump(saleItemForm) }}#}
+{#            {{ form_row(saleItemForm.product) }}#}
+        </td>
+        <td>
+{#            {{ form_row(saleItemForm.quantity) }}#}
+        </td>
+        <td>
+{#            {{ form_row(saleItemForm.discount) }}#}
+        </td>
+        <td>
+            <a href="#" class="btn btn-sm btn-danger remove-sale-item">
+                <i class="fas fa-trash-alt"></i>
+            </a>
+        </td>
+    </tr>
+{% endfor %}

@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Product;
+use App\Entity\Sale;
 use App\Entity\SaleItem;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -36,7 +37,10 @@ class SaleItemType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => SaleItem::class,
+            'sale' => null
         ]);
+
+        $resolver->setAllowedTypes('sale', [Sale::class, 'null']);
     }
 }
 

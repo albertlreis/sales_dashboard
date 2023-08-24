@@ -64,3 +64,7 @@ app_sale_index:
 app_sale_create:
     path: '/sale/create'
     controller: App\Controller\SaleController::create
+
+app_sale_edit:
+    path: '/sale/{id}/edit'
+    controller: App\Controller\SaleController::edit

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Sale;
+use App\Form\SaleItemType;
 use App\Form\SaleType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -54,6 +55,42 @@ class SaleController extends AbstractController
 
         return $this->render('sale/create.html.twig', [
             'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/sale/{id}/edit", name="app_sale_edit")
+     */
+    public function edit(Request $request, EntityManagerInterface $entityManager, int $id): Response
+    {
+        $sale = $entityManager->getRepository(Sale::class)->find($id);
+
+        if (!$sale) {
+            throw $this->createNotFoundException('Venda não encontrada');
+        }
+
+        $form = $this->createForm(SaleType::class, $sale);
+
+        $saleItemsForm = $this->createForm(SaleItemType::class, null, [
+            'sale' => $sale,
+        ]);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Atualize os dados da venda e seus produtos aqui
+            // ...
+
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Sale updated successfully.');
+
+            return $this->redirectToRoute('app_sale_index');
+        }
+
+        return $this->render('sale/edit.html.twig', [
+            'form' => $form->createView(),
+            'sale' => $sale,
+            'saleItemsForm' => $saleItemsForm->createView(),
         ]);
     }
 }
