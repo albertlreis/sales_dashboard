@@ -4,9 +4,10 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+class User implements UserInterface, \Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -21,12 +22,6 @@ class User
 
     #[ORM\Column(length: 255)]
     private ?string $password = null;
-
-    #[ORM\Column]
-    private ?\DateTimeImmutable $created_at = null;
-
-    #[ORM\Column]
-    private ?\DateTimeImmutable $updated_at = null;
 
     public function getId(): ?int
     {
@@ -69,27 +64,18 @@ class User
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getRoles(): array
     {
-        return $this->created_at;
+        // TODO: Implement getRoles() method.
     }
 
-    public function setCreatedAt(\DateTimeImmutable $created_at): static
+    public function eraseCredentials()
     {
-        $this->created_at = $created_at;
-
-        return $this;
+        // TODO: Implement eraseCredentials() method.
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
+    public function getUserIdentifier(): string
     {
-        return $this->updated_at;
-    }
-
-    public function setUpdatedAt(\DateTimeImmutable $updated_at): static
-    {
-        $this->updated_at = $updated_at;
-
-        return $this;
+        // TODO: Implement getUserIdentifier() method.
     }
 }
