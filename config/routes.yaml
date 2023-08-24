@@ -24,3 +24,11 @@ app_register:
 app_category_create:
     path: '/category/create'
     controller: App\Controller\CategoryController::create
+
+app_category_list:
+    path: '/category'
+    controller: App\Controller\CategoryController::index
+
+app_category_edit:
+    path: '/category/{id}/edit'
+    controller: App\Controller\CategoryController::edit

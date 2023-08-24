@@ -48,4 +48,31 @@ class CategoryController extends AbstractController
             'categories' => $categories,
         ]);
     }
+
+    /**
+     * @Route("/category/{id}/edit", name="app_category_edit")
+     */
+    public function edit(Request $request, EntityManagerInterface $entityManager, $id): Response
+    {
+        $category = $entityManager->getRepository(Category::class)->find($id);
+
+        if (!$category) {
+            throw $this->createNotFoundException('Category not found');
+        }
+
+        $form = $this->createForm(CategoryType::class, $category);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Category updated successfully.');
+
+            return $this->redirectToRoute('app_category_index');
+        }
+
+        return $this->render('category/edit.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
 }
