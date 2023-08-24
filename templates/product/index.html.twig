@@ -10,12 +10,16 @@
             <th>Nome</th>
             <th>Preço</th>
             <th>Categoria</th>
+            <th>Ações</th>
         </tr>
         {% for product in products %}
             <tr>
                 <td>{{ product.name }}</td>
                 <td>{{ product.price }}</td>
                 <td>{{ product.category.name }}</td>
+                <td>
+                    <a href="{{ path('app_product_edit', {'id': product.id}) }}">Edit</a>
+                </td>
             </tr>
         {% endfor %}
     </table>
