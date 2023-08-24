@@ -14,11 +14,11 @@
         </tr>
         {% for sale in sales %}
             <tr>
-                <td>{{ sale.date|date('Y-m-d H:i:s') }}</td>
+                <td>{{ sale.saleDate|date('Y-m-d H:i:s') }}</td>
                 <td>{{ sale.client.name }}</td>
-                <td>{{ sale.total }}</td>
+                <td></td>
                 <td>
-                    <a href="{{ path('app_sale_edit', {'id': sale.id}) }}">Edit</a>
+{#                    <a href="{{ path('app_sale_edit', {'id': sale.id}) }}">Edit</a>#}
                 </td>
             </tr>
         {% endfor %}

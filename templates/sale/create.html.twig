@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create Sale{% endblock %}
+
+{% block body %}
+    <h1>Create Sale</h1>
+
+    {{ form_start(form) }}
+
+    <div class="form-group">
+        {{ form_label(form.client, 'Cliente') }}
+        {{ form_widget(form.client, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.saleDate, 'Data da venda') }}
+        {{ form_widget(form.saleDate, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <h2>Products</h2>
+    <div id="saleItems" data-prototype="{{ form_widget(form.saleItems.vars.prototype)|e }}">
+        {{ form_widget(form.saleItems) }}
+    </div>
+    <button type="button" id="addSaleItem">Adicionar Produto</button>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var $saleItemsContainer = $('#saleItems');
+            var $addSaleItemButton = $('#addSaleItem');
+            var index = $saleItemsContainer.find(':input').length;
+
+            $addSaleItemButton.click(function() {
+                var prototype = $saleItemsContainer.data('prototype');
+                var newForm = prototype.replace(/__name__/g, index);
+                $saleItemsContainer.append(newForm);
+                index++;
+            });
+        });
+    </script>
+
+    <!-- You can add more fields for total, discount, etc. -->
+
+    <button type="submit" class="btn btn-primary">Create</button>
+    {{ form_end(form) }}
+{% endblock %}

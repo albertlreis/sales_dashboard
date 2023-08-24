@@ -60,3 +60,7 @@ app_client_edit:
 app_sale_index:
     path: '/sale'
     controller: App\Controller\SaleController::index
+
+app_sale_create:
+    path: '/sale/create'
+    controller: App\Controller\SaleController::create
