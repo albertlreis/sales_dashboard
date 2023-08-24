@@ -12,13 +12,6 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class CategoryController extends AbstractController
 {
-    #[Route('/category', name: 'app_category')]
-    public function index(): Response
-    {
-        return $this->render('category/index.html.twig', [
-            'controller_name' => 'CategoryController',
-        ]);
-    }
 
     /**
      * @Route("/category/create", name="app_category_create")
@@ -41,6 +34,18 @@ class CategoryController extends AbstractController
 
         return $this->render('category/create.html.twig', [
             'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/category", name="app_category_index")
+     */
+    public function index(EntityManagerInterface $entityManager): Response
+    {
+        $categories = $entityManager->getRepository(Category::class)->findAll();
+
+        return $this->render('category/index.html.twig', [
+            'categories' => $categories,
         ]);
     }
 }
